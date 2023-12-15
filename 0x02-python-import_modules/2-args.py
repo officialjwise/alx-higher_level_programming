@@ -1,14 +1,28 @@
 #!/usr/bin/python3
 
-if __name__ == '__main__':
+from sys import argv
 
-    import sys
-    length = len(sys.argv)
-    if length == 1:
-        print("{} arguments.".format(length - 1))
-    elif length == 2:
-        print("{} argument:".format(length - 1))
-    else:
-        print("{} arguments:".format(length - 1))
-    for i in range(1, length):
-        print("{}: {}".format(i, sys.argv[i]))
+
+def print_args() -> None:
+    """
+    Prints the number of command line arguments with
+    each argument on a new line
+    """
+    # get the command line arguments without the filename
+    size = len(argv[1:])
+
+    print(f"{size} argument{'s' if size == 0 or size > 1 else ''}", end="")
+
+    # check for when there is no arguments passed
+    if not argv[1:]:
+        print(".")
+        return
+
+    # we had arguments passed on the command line, let's print them
+    print(":")
+    for position, arg in enumerate(argv[1:], start=1):
+        print(f"{position}: {arg}")
+
+
+if __name__ == "__main__":
+    print_args()
